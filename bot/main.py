@@ -8,7 +8,9 @@ from discord.ext import tasks
 from googletrans import Translator
 colors=[0x1d8ddb,0x2c3157,0xd44492,0xbd3787,0x8a375,0x42ae4d,0x106939]
 import requests
-#Create googletrans instance 
+import contextlib
+import io
+#Create googletrans instance
 translator = Translator()
 #turn on a option for debug
 translator.raise_Exception = True
@@ -23,9 +25,9 @@ help_embed = discord.Embed(title="راهنمای دستورات بات <:logo:83
 """, color=0xffffff)
 #create discord.py instance
 bot = commands.Bot(command_prefix="tdb.")
+bot.remove_command('help')
 #create token varaible 
 TOKEN = os.getenv("DISCORD_TOKEN")
-bot.remove_command("help")
 client = discord.Client()
 
 golds={}
@@ -75,6 +77,8 @@ async def account(ctx):
   embed=discord.Embed(title='**🔰اطلاعات اکانت دیسکورد شما🔰**', description=f"نام کاربری:\n*`{ctx.message.author.name}`*\n-----\nنام مستعار:\n*`{nickname}`*\n-----\nآیدی عددی:\n*`{ctx.message.author.id}`*\n-----\nمنشن:\n{ctx.message.author.mention}",color=random.choice(colors))
   embed.set_image(url="https://images.hamshahrionline.ir/images/2013/5/13-5-12-1018583-1.jpg")
   await ctx.send(embed=embed)
+
+
 @bot.command()
 async def youtube(ctx):
   if "team" in [y.name.lower() for y in ctx.message.author.roles]:
@@ -87,18 +91,25 @@ async def youtube(ctx):
     embed=discord.Embed(title="خطا",description="من از اختاپوس می پرسم تو جزو اعضای تیم تمشکی؟",color=0xFF0000)
     embed.set_image(url="https://i.kym-cdn.com/photos/images/facebook/000/871/268/979.png")
     await ctx.send(embed=embed)
+
+
+
 @bot.command()
 async def t2en(ctx,* , text):
   translated_text=translator.translate(text,src='fa',dest='en').text
   msg=f'ترجمه متن مورد نظر:\n{translated_text}'
   embedd=discord.Embed(title="ترجمه شد",description=msg+add_gold(),color=random.choice(colors))
   await ctx.reply(embed=embedd)
+
+
 @bot.command()
 async def t2fa(ctx,* ,text):
   translated_text=translator.translate(text,src='en',dest='fa').text
   msg=f'ترجمه متن مورد نظر:\n{translated_text}'
   embedd=discord.Embed(title="ترجمه شد",description=msg+add_gold(),color=random.choice(colors))
   await ctx.reply(embed=embedd)
+
+
 @bot.command()
 async def run_code(ctx, *,commands=None):
   if str(ctx.message.author) in admins:
@@ -106,18 +117,35 @@ async def run_code(ctx, *,commands=None):
       embed=discord.Embed(title="خطا",description="منو سرکار گذاشتی یا خودتو که کامند میزنی ولی دستور نمیدی؟",color=0xFF0000)
       embed.set_image(url="https://cdn.thingiverse.com/assets/83/5c/96/ee/81/featured_preview_Crm4_G3uns8_1.jpg")
       await ctx.reply(embed)
+
+    str_obj = io.StringIO() #Retrieves a stream of data
     try:
-      exec(f"""locals()['temp'] = {commands}""")
-      output=locals()["temp"]
+      with contextlib.redirect_stdout(str_obj):
+        exec(commands)
+      output=str_obj.getvalue()  
     except Exception as error:
       output=f"ارور داد :( :\n{error}"
     embed=discord.Embed(title="ران شد :)",description=f"بیا اینم نتیجه:\n{output}",color=random.choice(colors))
     await ctx.reply(embed=embed)
+
+    
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
     embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
     await ctx.reply(embed=embed)
 
-
+@bot.command()
+async def send(ctx,*,message):
+  if not str(ctx.message.author) in admins:
+    embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
+    embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
+    await ctx.reply(embed=embed)
+  if not ctx.message.reference == None:
+    await ctx.message.delete()
+    await ctx.send(message)
+  else:
+    await ctx.message.delete()
+    ref = await ctx.channel.fetch_message(ctx.message.reference.message_id)
+    await ref.reply(message)
 alive()
 bot.run(TOKEN)
