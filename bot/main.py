@@ -47,6 +47,7 @@ async def on_ready():
     print(f"Logged in as {bot.user.name}({bot.user.id}")
 
 
+#ANCHOR ping and help command
 @bot.command(help='پینگ ربات')
 async def ping(ctx):
     await ctx.reply(f"پونگ! `{str(round(bot.latency * 1000))}` میلی ثانیه")
@@ -54,6 +55,8 @@ async def ping(ctx):
 async def help(ctx):
     await ctx.reply(embed=help_embed)
 
+
+#ANCHOR bot_is_online command
 async def bot_is_online(ctx):
   if str(ctx.message.author) in admins:
     channel = bot.get_channel(870624299877277716)
@@ -67,6 +70,7 @@ async def bot_is_online(ctx):
     await ctx.reply(embed=embed)
 
 
+#ANCHOR account command
 @bot.command()
 async def account(ctx):
   global nickname
@@ -79,6 +83,7 @@ async def account(ctx):
   embed=discord.Embed(title='**🔰اطلاعات اکانت دیسکورد شما🔰**', description=f"نام کاربری:\n*`{ctx.message.author.name}`*\n-----\nنام مستعار:\n*`{nickname}`*\n-----\nآیدی عددی:\n*`{ctx.message.author.id}`*\n-----\nمنشن:\n{ctx.message.author.mention}",color=random.choice(colors))
   embed.set_image(url="https://images.hamshahrionline.ir/images/2013/5/13-5-12-1018583-1.jpg")
   await ctx.send(embed=embed)
+
 
 
 @bot.command()
@@ -96,6 +101,9 @@ async def youtube(ctx):
 
 
 
+
+
+#ANCHOR translate commands
 @bot.command()
 async def t2en(ctx,* , text):
   translated_text=translator.translate(text,src='fa',dest='en').text
@@ -112,6 +120,7 @@ async def t2fa(ctx,* ,text):
   await ctx.reply(embed=embedd)
 
 
+#ANCHOR run code command
 @bot.command()
 async def run_code(ctx, *,commands=None):
   if str(ctx.message.author) in admins:
@@ -136,6 +145,7 @@ async def run_code(ctx, *,commands=None):
     embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
     await ctx.reply(embed=embed)
 
+#ANCHOR send command
 @bot.command()
 async def send(ctx,*,message):
   if not str(ctx.message.author) in admins:
@@ -149,16 +159,15 @@ async def send(ctx,*,message):
     await ctx.message.delete()
     ref = await ctx.channel.fetch_message(ctx.message.reference.message_id)
     await ref.reply(message)
+
+
+#ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
-  if not str(ctx.message.author) in admins:
-    embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
-    embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
-    await ctx.reply(embed=embed)
-  else:
-    announce_channel = await bot.get_channel(871708836153679892)
-    await announce_channel.send(message)
-    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+  await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+  announce_channel = await bot.get_channel(842130915966451766)
+  await announce_channel.send(message)
+  await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
 
 
 
