@@ -65,6 +65,8 @@ async def bot_is_online(ctx):
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
     embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
     await ctx.reply(embed=embed)
+
+
 @bot.command()
 async def account(ctx):
   global nickname
@@ -147,5 +149,20 @@ async def send(ctx,*,message):
     await ctx.message.delete()
     ref = await ctx.channel.fetch_message(ctx.message.reference.message_id)
     await ref.reply(message)
+@bot.command()
+async def announce(ctx,*,message):
+  if not str(ctx.message.author) in admins:
+    embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
+    embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
+    await ctx.reply(embed=embed)
+  else:
+    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+    announce_channel = bot.get_channel(871708836153679892)
+    await announce_channel.send(ctx.content)
+
+
+
+
+
 alive()
 bot.run(TOKEN)
