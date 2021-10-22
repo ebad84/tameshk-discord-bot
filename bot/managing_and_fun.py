@@ -27,7 +27,7 @@ async def update(ctx):
 async def on_message(message):
   await bot.process_commands(message)
   mention=message.author.mention
-  if ps.has_swear(str(message.content).replace("|","")) and not message.author == bot.user:
+  if ps.has_swear(str(message.content).replace("|","")) and not message.author == bot.user and not ctx.guild.id == 839208499912507469:
     filtered_message=ps.filter_words(str(message.content).replace("|",""))
     embed=discord.Embed(title="ادب مرد به از دولت اوست...",description=f"پیام از طرف {mention}\n{filtered_message}")
     embed.set_footer(text="لطفا مودب باشید\nمسیج شما به ادمین ها ارسال شد\nاگه فکر می کنید اینکه بات یه کلمه رکیک تو مسیج شما تشخیص داده یه باگه یا لازم نیست این کلمه به عنوان یه کلمه رکیک تشخیص داده بشه یه تیکت باز کنید و به ادمین ها اطلاع بدید")
