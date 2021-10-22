@@ -164,8 +164,9 @@ async def send(ctx,*,message):
 #ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
+  print('\n\ndfhzdhh')
   await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
-  announce_channel = await bot.get_channel(842130915966451766)
+  announce_channel = bot.get_channel(871708836153679892)
   await announce_channel.send(message)
   await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
 
