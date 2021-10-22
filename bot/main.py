@@ -158,7 +158,7 @@ async def announce(ctx,*,message):
   else:
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
     announce_channel = bot.get_channel(871708836153679892)
-    await announce_channel.send(ctx.content)
+    await announce_channel.send(message)
 
 
 
