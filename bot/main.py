@@ -140,7 +140,7 @@ async def send(ctx,*,message):
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
     embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
     await ctx.reply(embed=embed)
-  if not ctx.message.reference == None:
+  if not ctx.message.reference:
     await ctx.message.delete()
     await ctx.send(message)
   else:
