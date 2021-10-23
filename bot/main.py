@@ -164,11 +164,16 @@ async def send(ctx,*,message):
 #ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
-  print('\n\ndfhzdhh')
-  await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
-  announce_channel = bot.get_channel(871708836153679892)
-  await announce_channel.send(message)
-  await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+  if ctx.author in admins:
+    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+    announce_channel = bot.get_channel(871708836153679892)
+    await announce_channel.send(message)
+    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+  else:
+    embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
+    embed.set_image(url="https://s.keepmeme.com/files/en_posts/20210512/black-guy-smiles-at-camera-poker-face-meme.jpg")
+    await ctx.reply(embed=embed)
+  
 
 
 
