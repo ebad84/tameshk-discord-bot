@@ -15,7 +15,7 @@ translator = Translator()
 #turn on a option for debug
 translator.raise_Exception = True
 #insert your admins here
-admins=["SMM#9107","NGP#9847","@HADI#0001","@Amir14#6843"]
+admins=["SMM#9107","NGP#9847","HADI#0001","Amir14#6843"]
 #help text embed
 help_embed = discord.Embed(title="راهنمای دستورات بات <:logo:839559626265329704>:",description="""
 ***تمامی دستورات با ***`.tdb`*** آغاز می شوند***
