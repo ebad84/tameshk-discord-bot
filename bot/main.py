@@ -166,7 +166,7 @@ async def send(ctx,*,message):
 async def announce(ctx,*,message):
   if str(ctx.message.author) in admins:
     announce_channel = bot.get_channel(873598064881975396)
-    await announce_channel.send(message)
+    await announce_channel.send((message+"\n@Tameshki-✅"))
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
