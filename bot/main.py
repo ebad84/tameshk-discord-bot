@@ -177,6 +177,7 @@ async def announce(ctx,*,message):
 
 
 
+ 
 
 alive()
 bot.run(TOKEN)
