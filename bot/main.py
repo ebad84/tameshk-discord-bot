@@ -165,7 +165,7 @@ async def send(ctx,*,message):
 @bot.command()
 async def announce(ctx,*,message):
   if str(ctx.message.author) in admins:
-    announce_channel = bot.get_channel(871708836153679892)
+    announce_channel = bot.get_channel(873598064881975396)
     await announce_channel.send(message)
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
