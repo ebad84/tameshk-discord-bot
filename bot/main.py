@@ -170,7 +170,7 @@ async def announce(ctx,*,message):
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
     announce_channel = bot.get_channel(871708836153679892)
-    ctx.message.attachments[0].save('image')
+    await ctx.message.attachments[0].save('image')
     await announce_channel.send(message,file=ctx.message.attachments[0])
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
