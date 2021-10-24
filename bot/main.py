@@ -1,5 +1,6 @@
 import discord
 import os
+from discord.message import Attachment
 from khayyam import JalaliDatetime
 from live import alive
 from discord.ext import commands
@@ -170,10 +171,12 @@ async def announce(ctx,*,message):
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
     announce_channel = bot.get_channel(871708836153679892)
-    await ctx.message.attachments[0].save('../image.png')
-    with open('../image.png','rb') as image:
-      await announce_channel.send(message,file=discord.File(image))
-      os.remove('../image.png')
+    attachment = ctx.message.attachments[0]
+    format = attachment.content_type
+    await attachment.save(f'../file.{format}')
+    with open(f'../file.{format}','rb') as file:
+      await announce_channel.send(message,file=discord.File(file))
+      os.remove(f'../file.{format}')
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
