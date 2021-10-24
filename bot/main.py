@@ -164,7 +164,7 @@ async def send(ctx,*,message):
 #ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
-  if str(ctx.message.author) in admins and len(ctx.message.attachments)==1:
+  if str(ctx.message.author) in admins and len(ctx.message.attachments)==0:
     announce_channel = bot.get_channel(871708836153679892)
     await announce_channel.send(message)
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
