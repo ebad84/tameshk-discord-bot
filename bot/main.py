@@ -165,11 +165,11 @@ async def send(ctx,*,message):
 @bot.command()
 async def announce(ctx,*,message):
   if str(ctx.message.author) in admins and len(ctx.message.attachments)==1:
-    announce_channel = bot.get_channel(873598064881975396)
+    announce_channel = bot.get_channel(871708836153679892)
     await announce_channel.send(message)
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
-    announce_channel = bot.get_channel(873598064881975396)
+    announce_channel = bot.get_channel(871708836153679892)
     await announce_channel.send(message,file=ctx.message.attachments[0])
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
