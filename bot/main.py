@@ -176,10 +176,10 @@ async def announce(ctx,*,message):
       announce_channel = bot.get_channel(871708836153679892)
       attachment = ctx.message.attachments[0]
       format = attachment.content_type
-      await attachment.save(f'{path}/file.{format.replace("/","."}')
-      with open(f'{path}/file.{format.replace("/","."}','rb') as file:
+      await attachment.save(f'{path}/file.{format.replace("/",".")}')
+      with open(f'{path}/file.{format.replace("/",".")}','rb') as file:
         await announce_channel.send(message,file=discord.File(file))
-        os.remove(f'{path}/file.{format.replace("/","."}')
+        os.remove(f'{path}/file.{format.replace("/",".")}')
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
