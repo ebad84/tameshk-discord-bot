@@ -170,8 +170,11 @@ async def announce(ctx,*,message):
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
     announce_channel = bot.get_channel(871708836153679892)
-    await ctx.message.attachments[0].save('image')
-    await announce_channel.send(message,file=ctx.message.attachments[0])
+    await ctx.message.attachments[0].save('image.png')
+    image = open('image.png')
+    await announce_channel.send(message,file=image)
+    image.close()
+    os.remove('image.png')
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
