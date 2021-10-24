@@ -164,9 +164,13 @@ async def send(ctx,*,message):
 #ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
-  if str(ctx.message.author) in admins:
+  if str(ctx.message.author) in admins and len(ctx.message.attachments)==1:
     announce_channel = bot.get_channel(873598064881975396)
     await announce_channel.send(message)
+    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+  elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
+    announce_channel = bot.get_channel(873598064881975396)
+    await announce_channel.send(message,file=ctx.message.attachments[0])
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
