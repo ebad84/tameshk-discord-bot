@@ -1,4 +1,5 @@
 import discord
+from discord.colour import Color
 from discord.ext import commands
 import os
 import random
@@ -36,7 +37,10 @@ async def on_message(message):
     await message.channel.send(embed=embed
     )
     channel=bot.get_channel(855075598812184577)
-    await channel.send(f"ye band khodaee fosh dad\nin mantioneshe:{mention}\nin ham message:\n{message.content}")
+    swear_log_embed=discord.Embed(title='یه بنده خدایی حرفای بد بد میزنه')
+    swear_log_embed.add_field('آیدیش:',str(message.author),inline=False)
+    swear_log_embed.add_field('محتوای پیامش:',str(message.content),inline=False)
+    await channel.send(embed=swear_log_embed)
 
 
 
