@@ -11,7 +11,9 @@ colors=[0x1d8ddb,0x2c3157,0xd44492,0xbd3787,0x8a375,0x42ae4d,0x106939]
 import requests
 import contextlib
 import io
+from pathlib import Path
 #Create googletrans instance
+path = Path ("").parent.absolute()
 translator = Translator()
 #turn on a option for debug
 translator.raise_Exception = True
@@ -165,18 +167,19 @@ async def send(ctx,*,message):
 #ANCHOR announce command
 @bot.command()
 async def announce(ctx,*,message):
-  if str(ctx.message.author) in admins and len(ctx.message.attachments)==0:
-    announce_channel = bot.get_channel(871708836153679892)
-    await announce_channel.send(message)
-    await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
-  elif str(ctx.message.author) in admins and len(ctx.message.attachments)>=1:
-    announce_channel = bot.get_channel(871708836153679892)
-    attachment = ctx.message.attachments[0]
-    format = attachment.content_type
-    await attachment.save(f'../file.{format}')
-    with open(f'../file.{format}','rb') as file:
-      await announce_channel.send(message,file=discord.File(file))
-      os.remove(f'../file.{format}')
+  if str(ctx.message.author) in admins:
+    if len(ctx.message.attachments)==0:
+      announce_channel = bot.get_channel(871708836153679892)
+      await announce_channel.send(message)
+      await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
+    elif len(ctx.message.attachments)>=1:
+      announce_channel = bot.get_channel(871708836153679892)
+      attachment = ctx.message.attachments[0]
+      format = attachment.content_type
+      await attachment.save(f'{path}/file.{format}')
+      with open(f'{path}/file.{format}','rb') as file:
+        await announce_channel.send(message,file=discord.File(file))
+        os.remove(f'{path}/file.{format}')
     await ctx.reply("پیام به چنل انانسمنت سرور کامیونیتی ارسال شد!")
   else:
     embed=discord.Embed(title="خطا", description="شما ادمین نیستید :)", color=0xFF0000)
